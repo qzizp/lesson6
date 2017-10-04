@@ -10,7 +10,7 @@ body {
 }
 
 .wrapper {
-  margin: 100px auto;
+  margin: 55px auto;
   width: 70%;
 }
 
@@ -65,4 +65,21 @@ body {
   margin: 20px;
   display: block;
   text-align: center;
+}
+
+.test-form {
+  margin-bottom: 20px;
+}
+
+fieldset {
+  margin-bottom: 15px;
+}
+
+.onetest {
+    float: left;
+    margin: 10px 20px 10px 0;
+}
+
+.onetest-p {
+    margin-bottom: 0;
 }

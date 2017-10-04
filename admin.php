@@ -1,10 +1,18 @@
 <?php
+  $allowExtention = "json";
+
 
   if (isset($_FILES["userfile"]["name"]) and !empty($_FILES["userfile"]["name"])) {
-    if ($_FILES["userfile"]["error"] == UPLOAD_ERR_OK and move_uploaded_file($_FILES["userfile"]["tmp_name"], "./uploaded-tests/" . $_FILES["userfile"]["name"])) {
-      echo "Ваш тест загружен!";
+    $testExtension = pathinfo($_FILES["userfile"]["name"]);
+
+    if ($testExtension["extension"] === $allowExtention) {
+        if ($_FILES["userfile"]["error"] == UPLOAD_ERR_OK and move_uploaded_file($_FILES["userfile"]["tmp_name"], "./uploaded-tests/" . $_FILES["userfile"]["name"])) {
+          echo "Ваш тест загружен!";
+        } else {
+          echo "Ваш тест не загружен!";
+        }
     } else {
-      echo "Ваш тест не загружен!";
+        echo "Вы загружаете не JSON-файл.";
     }
   }
   
@@ -23,10 +31,9 @@
   <div class="wrapper">
     <h1 class="test-upload-header">Загрузи свой тест!</h1>
     <form class="test-upload-form" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="MAX_FILE_SIZE" value="500000">
-      <label for="testUpload">Выберите тест для загрузки:</label><br>
-      <input id="test-upload" type="file" name="userfile" value="Выбрать тест"><br>
-      <span class="file-size-notice">Размер вашего теста не должен превышать 500 кб</span><br>
+      <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+      <input id="test-upload" multiple type="file" name="userfile" value="Выбрать тест"><br>
+      <span class="file-size-notice">Размер вашего теста не должен превышать 100 кб</span><br>
       <button class="add-test" type="submit">Загрузить тест</button>
     </form>
     <a class="all-tests-list" href="list.php">Посмотреть все тесты</a>
